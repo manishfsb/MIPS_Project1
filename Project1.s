@@ -6,7 +6,7 @@ reply:	.space 11
 
 .text
 main:	
-	li $t0, 0
+	li $s0, 0
 	
 	li $v0, 4
 	la $a0, msg
@@ -35,8 +35,8 @@ Filter:	li $t1, 48
 	
 	
 	blt $a0, $t1, invalid
-	bgt $a0,$t7, invalid 
-	ble $a0, $t7, more
+	bgt $a0,$t6, invalid 
+	ble $a0, $t6, more
 
 more:	
 	bge $a0, $t5, Lower
@@ -48,11 +48,11 @@ more:
 numeric:
 
 Lower:	
-	li $t1, -87
+	li $s2, -87
 	
 	li $v0, 1	
-	add $t0, $a0, $t1
-	add $a0, $t0, $zero
+	add $s0, $a0, $s2
+	add $a0, $s0, $zero
 	syscall  
 
 	j After
