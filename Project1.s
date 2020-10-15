@@ -34,7 +34,6 @@ main:
 more:	
 	bgt $a0, $s0, Lower
 	bgt $a0, $s5, invalid
-	bgt $a0, $s5, invalid
 	bgt $a0, $s6, Upper
 	bgt $a0, $s2, invalid
 	bgt $a0, $s7, numeric
@@ -46,8 +45,6 @@ Lower:
 
 
 Upper:
-	li $v0, 11
-	syscall
 
 invalid:li $v0, 10
 	syscall
