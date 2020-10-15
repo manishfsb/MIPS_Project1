@@ -6,6 +6,8 @@ reply:	.space 11
 
 .text
 main:	
+	li $t0, 0
+	
 	li $v0, 4
 	la $a0, msg
 	syscall 
@@ -14,22 +16,51 @@ main:
 	la $a0, reply
 	li $a1, 10
 	syscall
-	
-	
-	li $t1, -87
+ 	
 	la $s1, reply
+
+First:
 	lb $a0, 0($s1)
+	j Filter
+
+After:	addi $s1, 1
+	j First
+	
+Filter:	li $s7, 47
+	li $s2, 57
+	li $s3, 122
+	li $s4, 97
+	li $s5, 90
+	li $s6, 64
+	li $s0, 96	
+
+	blt $a0, $s2, invalid
+	bgt $a0,$s3, invalid 
+	blt $a0, $s4, more
+
+more:	
+	bgt $a0, $s0, Lower
+	bgt $a0, $s5, invalid
+	bgt $a0, $s6, Upper
+	bgt $a0, $s2, invalid
+	bgt $a0, $s7, numeric
+
+numeric:
+
+Lower:	
+	li $t1, -87
 	
 	li $v0, 1	
-	li $t0, 0
 	add $t0, $a0, $t1
 	add $a0, $t0, $zero
-	syscall 
+	syscall  
 
-
-	li $v0, 10
-	syscall	
+	j After
 	
+
+Upper:
+
+invalid:j After
 	
 
 	
