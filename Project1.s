@@ -49,13 +49,10 @@ numeric:
 
 Lower:	
 	li $s2, -87
-	
 	li $v0, 1	
 	add $s3, $a0, $s2
 	add $s0, $s0, $s3
 	add $a0, $s0, $zero
-	syscall  
-
 	j After
 	
 
