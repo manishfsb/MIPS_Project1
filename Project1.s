@@ -26,25 +26,24 @@ First:
 After:	addi $s1, 1
 	j First
 	
-Filter:	li $t0, 47
-	li $t1, 48 
+Filter:	li $t1, 48 
 	li $t2, 57
 	li $t3, 64
 	li $t4, 90
-	li $t5, 96
-	li $t6, 97
-	li $t7, 122
+	li $t5, 97
+	li $t6, 122
+	
 	
 	blt $a0, $t1, invalid
-	bgt $a0,$t2, invalid 
-	blt $a0, $s4, more
+	bgt $a0,$t7, invalid 
+	ble $a0, $t7, more
 
 more:	
-	bgt $a0, $t7, Lower
-	bgt $a0, $t6, invalid
-	bgt $a0, $t5, Upper
+	bge $a0, $t5, Lower
 	bgt $a0, $t4, invalid
-	bgt $a0, $t3, numeric
+	bgt $a0, $t3, Upper
+	bgt $a0, $t2, invalid
+	bge $a0, $t1, numeric
 
 numeric:
 
