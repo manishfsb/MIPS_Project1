@@ -46,9 +46,11 @@ more:
 
 numeric:
 
-
-Lower:	li $v0, 11 
+Lower:	subu $t0, $a0, 87
+	add $t1, $t1, $t0
+	move $a0, $t1
 	syscall
+	    
 
 
 Upper:
