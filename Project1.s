@@ -1,7 +1,6 @@
 .data
 
 msg:	.asciiz "Input: "
-string:	.asciiz "Valid"
 reply:	.space 11
 
 
@@ -15,19 +14,26 @@ main:
 	la $a0, reply
 	li $a1, 10
 	syscall
-
 	
-	blt $a0, 58, invalid
-	bgt $a0,122, invalid 
+	la $s1, reply
+	lb $a0, 1($s1)
 
-	blt $a0, 97, more
+	li $s2, 58
+	li $s3, 122
+	li $s4, 97
+	li $s5, 90
+	li $s6, 64	
 
-more:	bgt $a0, 90, invalid
-	bgt $a0, 64, small
+	blt $a0, $s2, invalid
+	bgt $a0,$s3, invalid 
 
-small:
+	blt $a0, $s4, more
+
+more:	bgt $a0, $s5, invalid
+	bgt $a0, $s6, Upper
+
+Upper:
 	li $v0, 11
-	la $a1, $a0
 	syscall
 
 invalid:li $v0, 10
