@@ -15,8 +15,14 @@ main:
 	li $a1, 10
 	syscall
 	
+
 	la $s1, reply
-	lb $a0, 1($s1)
+	
+First:
+	lb $a0, 0($s1)
+
+After:	addi $s1, 1
+	j First
 	
 	li $s7, 47
 	li $s2, 57
@@ -28,7 +34,6 @@ main:
 
 	blt $a0, $s2, invalid
 	bgt $a0,$s3, invalid 
-
 	blt $a0, $s4, more
 
 more:	
@@ -46,8 +51,7 @@ Lower:
 
 Upper:
 
-invalid:li $v0, 10
-	syscall
+invalid:j After
 	
 
 	
