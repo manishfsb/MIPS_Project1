@@ -1,26 +1,29 @@
 .data
 
-msg:	.asciiz "Manish"
+msg:	.asciiz "Input: "
+reply:	.space 11
 
 
 .text
-main:
-	la $s1, msg
-	li $t2, 0
+main:	
+	li $v0, 4
+	la $a0, msg
+	syscall 
 	
-back:	slt $t1, $t2, 6
-	bne $t1, $zero, index
+	li $v0, 8						
+	la $a0, reply
+	li $a1, 10
+	syscall 
 	
+	li $v0, 11
+	la $s1, reply
+	lb $a0, 0($s1) 
+	syscall
+
 	li $v0, 10
 	syscall
- 
-index: 
-	li $v0, 11
-	lb $a0, 0($s1)
-	addi $s1, $s1, 1
-	addi $t2, $t2, 1
-	syscall
-	j back
+	
+
 	
 
 	
