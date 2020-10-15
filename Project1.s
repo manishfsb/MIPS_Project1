@@ -20,11 +20,12 @@ main:
 	
 First:
 	lb $a0, 0($s1)
+	j Filter
 
 After:	addi $s1, 1
 	j First
 	
-	li $s7, 47
+Filter:	li $s7, 47
 	li $s2, 57
 	li $s3, 122
 	li $s4, 97
@@ -46,7 +47,8 @@ more:
 numeric:
 
 
-Lower:
+Lower:	li $v0, 11 
+	syscall
 
 
 Upper:
