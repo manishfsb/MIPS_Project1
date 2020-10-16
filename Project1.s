@@ -2,6 +2,7 @@
 
 msg:	.asciiz "Input: "
 reply:	.space 11
+line:	.asciiz "\n"
 
 
 .text
@@ -14,7 +15,7 @@ main:
 	
 	li $v0, 8						
 	la $a0, reply
-	li $a1, 10
+	li $a1, 11
 	syscall
  	
 	la $s1, reply
@@ -68,9 +69,13 @@ invalid:
 	add $s0, $s0, $zero
 	j After
 
-End:	li $v0, 1
+End:	li $v0, 4
+	la $a0, line
+	syscall	
+
+	li $v0, 1
 	add $a0, $s0, $zero
-	syscall
+	syscall	
 
 	li $v0, 10
 	syscall
