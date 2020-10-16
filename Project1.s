@@ -18,12 +18,13 @@ main:
 	syscall
  	
 	la $s1, reply
+	addi $s4, $s1, 10 
 
-First:
-	lb $a0, 0($s1)
+First:	lb $a0, 0($s1)
 	j Filter
 
-After:	addi $s1, 1
+After:	beq $s4, $s1, End 
+	addi $s1, 1
 	j First
 	
 Filter:	li $t1, 48 
@@ -46,34 +47,35 @@ more:
 	bge $a0, $t1, numeric
 
 numeric:
-
 	li $s2, -48	
 	add $s3, $a0, $s2
-	add $s0, $s0, $s3
-	add $a0, $s0, $zero	
+	add $s0, $s0, $s3	
 	j After
 	
 
-Lower:	
-	
-	li $s2, -87	
+Lower:	li $s2, -87	
 	add $s3, $a0, $s2
 	add $s0, $s0, $s3
-	add $a0, $s0, $zero
-	j After
-	
+	j After	
 
-Upper:
-	
-	li $s2, -55	
+Upper:	li $s2, -55	
 	add $s3, $a0, $s2
 	add $s0, $s0, $s3
-	add $a0, $s0, $zero
 	j After
 	
-	
 
-invalid:j After
+invalid:
+	add $s0, $s0, $zero
+	j After
+
+End:	li $v0, 1
+	add $a0, $s0, $zero
+	syscall
+
+	li $v0, 10
+	syscall
+
+	
 	
 
 	
