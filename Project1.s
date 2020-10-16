@@ -1,9 +1,7 @@
 .data
 
 msg:	.asciiz "Input: "
-reply:	.space 11
-line:	.asciiz "\n"
-
+reply:	.space 10
 
 .text
 main:	
@@ -15,7 +13,7 @@ main:
 	
 	li $v0, 8						
 	la $a0, reply
-	li $a1, 11
+	li $a1, 12
 	syscall
  	
 	la $s1, reply
@@ -31,9 +29,9 @@ After:	beq $s4, $s1, End
 Filter:	li $t1, 48 
 	li $t2, 57
 	li $t3, 64
-	li $t4, 90
+	li $t4, 83
 	li $t5, 97
-	li $t6, 122
+	li $t6, 115
 	
 	
 	blt $a0, $t1, invalid
@@ -69,11 +67,7 @@ invalid:
 	add $s0, $s0, $zero
 	j After
 
-End:	li $v0, 4
-	la $a0, line
-	syscall	
-
-	li $v0, 1
+End:	li $v0, 1
 	add $a0, $s0, $zero
 	syscall	
 
