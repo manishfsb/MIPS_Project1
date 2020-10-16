@@ -47,6 +47,13 @@ more:
 
 numeric:
 
+	li $s2, -48	
+	add $s3, $a0, $s2
+	add $s0, $s0, $s3
+	add $a0, $s0, $zero	
+	j After
+	
+
 Lower:	
 	
 	li $s2, -87	
@@ -57,12 +64,11 @@ Lower:
 	
 
 Upper:
-	li $v0, 1
+	
 	li $s2, -55	
 	add $s3, $a0, $s2
 	add $s0, $s0, $s3
 	add $a0, $s0, $zero
-	syscall
 	j After
 	
 	
